@@ -120,9 +120,7 @@ int main() {
 #endif
 
 // 10250 : ACM 호텔
-#if 1
-
-int room[100][100];
+#if 0
 
 int main() {
 
@@ -134,6 +132,88 @@ int main() {
 		n--;
 
 		printf("%d%02d\n", n%h + 1, n / h + 1);
+	}
+
+	return 0;
+}
+#endif
+
+// 1011 : Fly me to the Alpha Centauri
+#if 0
+
+int sol(int remain, int speed) {
+	int ret = 0;
+	while (remain > 0) {
+		if (remain > speed * 2) {
+			ret += 2;
+			remain -= speed * 2;
+			speed++;
+		}
+		else {
+			int cnt = remain / speed;
+			remain -= cnt * speed;
+			ret += cnt;
+			speed--;
+		}
+	}
+	return ret;
+}
+
+int main() {
+
+	int t, x, y;
+	int dist;
+
+	scanf("%d", &t);
+
+	for (int i = 0; i < t; i++) {
+		scanf("%d %d", &x, &y);
+
+		dist = y - x;
+
+		int res = sol(dist, 1);
+
+		printf("%d\n", res);
+	}
+
+	return 0;
+}
+#endif
+
+// 6064 : 카잉 달력
+#if 1
+
+int gcd(int a, int b) {
+	if (a%b == 0)
+		return b;
+
+	return gcd(b, a%b);
+}
+
+int lcm(int a, int b) {
+	return (a*b) / gcd(a, b);
+}
+
+int main() {
+
+	int tc;
+	int m, n, x, y, x2, y2;
+
+	scanf("%d", &tc);
+	while (tc--) {
+		scanf("%d %d %d %d", &m, &n, &x, &y);
+
+		int maxYear = lcm(m, n);
+
+		while (1) {
+			if (x > maxYear || (x - 1) % n + 1 == y)
+				break;
+			x += m;
+		}
+		if (x > maxYear)
+			printf("-1\n");
+		else
+			printf("%d\n", x);
 	}
 
 	return 0;
