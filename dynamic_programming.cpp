@@ -55,7 +55,7 @@ int main() {
 #endif
 
 // 11066 : 파일 합치기
-#if 1
+#if 0
 
 int Min(int a, int b) {
 	return a < b ? a : b;
@@ -102,6 +102,40 @@ int main() {
 		cout << dpf(1, k) << endl;
 
 	}
+
+	return 0;
+}
+#endif
+
+// 1149 : RGB거리
+#if 1
+
+int N, r, g, b;
+int RGB[3];
+int cost[3];
+int sum;
+
+int main() {
+
+	ios_base::sync_with_stdio(0);
+	cin.tie(0); //cin 실행속도 향상
+
+	cin >> N;
+
+	cin >> r >> g >> b;
+	RGB[0] = r, RGB[1] = g, RGB[2] = b;
+	for (int i = 1; i < N; i++) {
+		cin >> r >> g >> b;
+		for (int j = 0; j < 3; j++) {
+			cost[j] = RGB[j];
+		}
+		RGB[0] = r + min(cost[1], cost[2]);
+		RGB[1] = g + min(cost[0], cost[2]);
+		RGB[2] = b + min(cost[1], cost[0]);
+	}
+
+	sum = RGB[0] > RGB[1] ? (RGB[1] > RGB[2] ? RGB[2] : RGB[1]) : (RGB[0] > RGB[2] ? RGB[2] : RGB[0]);
+	cout << sum << endl;
 
 	return 0;
 }
